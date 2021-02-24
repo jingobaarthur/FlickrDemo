@@ -13,12 +13,14 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         let imgView = UIImageView()
         imgView.backgroundColor = .clear
         imgView.contentMode = .scaleAspectFit
+        imgView.backgroundColor = .lightGray
         return imgView
     }()
     
     let label: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.text = "--"
         return label
     }()
     

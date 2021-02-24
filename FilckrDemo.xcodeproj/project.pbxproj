@@ -21,6 +21,7 @@
 		4DF5DA8825E63A0A00557002 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF5DA8725E63A0A00557002 /* PhotoCollectionViewCell.swift */; };
 		4DF5DA8C25E647B000557002 /* PhotoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF5DA8B25E647B000557002 /* PhotoDetailViewModel.swift */; };
 		4DF5DA8F25E65F9600557002 /* UICollectionVIew+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF5DA8E25E65F9600557002 /* UICollectionVIew+extension.swift */; };
+		4DF5DA9325E6B2A800557002 /* FavotiteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF5DA9225E6B2A800557002 /* FavotiteViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		4DF5DA8725E63A0A00557002 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		4DF5DA8B25E647B000557002 /* PhotoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewModel.swift; sourceTree = "<group>"; };
 		4DF5DA8E25E65F9600557002 /* UICollectionVIew+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionVIew+extension.swift"; sourceTree = "<group>"; };
+		4DF5DA9225E6B2A800557002 /* FavotiteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavotiteViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				4D669E1C25E610EA0041C19E /* FavoriteViewController.swift */,
+				4DF5DA9225E6B2A800557002 /* FavotiteViewModel.swift */,
 			);
 			path = Favotite;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				4DF5DA8C25E647B000557002 /* PhotoDetailViewModel.swift in Sources */,
 				4D669E1925E610D20041C19E /* PhotoDetailViewController.swift in Sources */,
 				4DF5DA8825E63A0A00557002 /* PhotoCollectionViewCell.swift in Sources */,
+				4DF5DA9325E6B2A800557002 /* FavotiteViewModel.swift in Sources */,
 				4D669E0125E5434C0041C19E /* SceneDelegate.swift in Sources */,
 				4D669E1D25E610EA0041C19E /* FavoriteViewController.swift in Sources */,
 				4DF5DA8125E62ADD00557002 /* APIManager.swift in Sources */,
