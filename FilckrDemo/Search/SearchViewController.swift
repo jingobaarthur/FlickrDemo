@@ -46,6 +46,7 @@ class SearchViewController: UIViewController {
         setUpUI()
         textFieldAction()
         bindViewModel()
+        print("Search completed")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
