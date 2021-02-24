@@ -16,6 +16,16 @@ class PhotoDetailViewModel{
     var searchTitle = ""
     var currentPrePage: Int = 0
     
+    func addToFavorite(id: String, row: Int){
+        print("新增至我的最愛-->id: \(id), row: \(row)")
+        var photoDataFromUserDefaults = UserDefaultsData.sharedInstance.photoData
+        let filterArray = photo.filter {
+            $0.id == id
+        }
+        photoDataFromUserDefaults += filterArray
+        UserDefaultsData.sharedInstance.photoData = photoDataFromUserDefaults
+    }
+    
     func fetchPhotoData(text: String, pages: String, prePage: String){
         APIManager.sharedInstance.searchRequest(HttpRequest(text: text, perPage: prePage, page: pages)) { [weak self] (result) in
             guard let strongSelf = self else { return }

@@ -22,6 +22,7 @@
 		4DF5DA8C25E647B000557002 /* PhotoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF5DA8B25E647B000557002 /* PhotoDetailViewModel.swift */; };
 		4DF5DA8F25E65F9600557002 /* UICollectionVIew+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF5DA8E25E65F9600557002 /* UICollectionVIew+extension.swift */; };
 		4DF5DA9325E6B2A800557002 /* FavotiteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF5DA9225E6B2A800557002 /* FavotiteViewModel.swift */; };
+		4DF5DA9825E6BC6200557002 /* UserDefaultsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF5DA9725E6BC6200557002 /* UserDefaultsData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		4DF5DA8B25E647B000557002 /* PhotoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewModel.swift; sourceTree = "<group>"; };
 		4DF5DA8E25E65F9600557002 /* UICollectionVIew+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionVIew+extension.swift"; sourceTree = "<group>"; };
 		4DF5DA9225E6B2A800557002 /* FavotiteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavotiteViewModel.swift; sourceTree = "<group>"; };
+		4DF5DA9725E6BC6200557002 /* UserDefaultsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,8 @@
 		4D669DFD25E5434C0041C19E /* FilckrDemo */ = {
 			isa = PBXGroup;
 			children = (
+				4DF5DA9625E6BC4100557002 /* Extensions */,
+				4DF5DA9525E6BC2D00557002 /* UserDefaults */,
 				4DF5DA7E25E62AB600557002 /* APIManager */,
 				4DF5DA7925E6294800557002 /* Models */,
 				4D669E1725E610AC0041C19E /* Favotite */,
@@ -85,7 +89,6 @@
 				4D669E0725E5434D0041C19E /* Assets.xcassets */,
 				4D669E0925E5434D0041C19E /* LaunchScreen.storyboard */,
 				4D669E0C25E5434D0041C19E /* Info.plist */,
-				4DF5DA8E25E65F9600557002 /* UICollectionVIew+extension.swift */,
 			);
 			path = FilckrDemo;
 			sourceTree = "<group>";
@@ -140,6 +143,22 @@
 				4DF5DA8725E63A0A00557002 /* PhotoCollectionViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		4DF5DA9525E6BC2D00557002 /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				4DF5DA9725E6BC6200557002 /* UserDefaultsData.swift */,
+			);
+			path = UserDefaults;
+			sourceTree = "<group>";
+		};
+		4DF5DA9625E6BC4100557002 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4DF5DA8E25E65F9600557002 /* UICollectionVIew+extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,6 +238,7 @@
 				4D669DFF25E5434C0041C19E /* AppDelegate.swift in Sources */,
 				4DF5DA8C25E647B000557002 /* PhotoDetailViewModel.swift in Sources */,
 				4D669E1925E610D20041C19E /* PhotoDetailViewController.swift in Sources */,
+				4DF5DA9825E6BC6200557002 /* UserDefaultsData.swift in Sources */,
 				4DF5DA8825E63A0A00557002 /* PhotoCollectionViewCell.swift in Sources */,
 				4DF5DA9325E6B2A800557002 /* FavotiteViewModel.swift in Sources */,
 				4D669E0125E5434C0041C19E /* SceneDelegate.swift in Sources */,

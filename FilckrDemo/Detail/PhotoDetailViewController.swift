@@ -65,9 +65,7 @@ extension PhotoDetailViewController{
         viewModel.completed = { [weak self] in
             print("DidFinish fetch photo data")
             self?.refreshControl.endRefreshing()
-            self?.collectionView.reload(completion: {
-                
-            })
+            self?.collectionView.reload(completion: {})
         }
     }
     @objc func didPullDownToUpdate(){
@@ -77,14 +75,17 @@ extension PhotoDetailViewController{
     }
 }
 //MARK: UICollectionView delegate & datasource
-extension PhotoDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+extension PhotoDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.photo.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as! PhotoCollectionViewCell
-        cell.config(text: viewModel.photo[indexPath.item].title, imgUrl: viewModel.photo[indexPath.item].urlString)
+        cell.config(text: viewModel.photo[indexPath.item].title, imgUrl: viewModel.photo[indexPath.item].urlString, isFavoriteMode: false, row: indexPath.item, id: viewModel.photo[indexPath.item].id)
+        cell.didTappedFavorite = { [weak self] (callback) in
+            self?.viewModel.addToFavorite(id: callback.id, row: callback.row)
+        }
         return cell
     }
     

@@ -9,6 +9,12 @@ import UIKit
 
 class PhotoCollectionViewCell: UICollectionViewCell {
     
+    var didTappedFavorite: (((id: String, row: Int)) -> Void)?
+    
+    var currentRow = 0
+    
+    var currentID = ""
+    
     let photoImageView: UIImageView = {
         let imgView = UIImageView()
         imgView.backgroundColor = .clear
@@ -23,6 +29,12 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    let favoriteButton: UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(named: "icon_UnFavorite"), for: .normal)
+        return btn
+    }()
+    
     override init(frame: CGRect) {
     super.init(frame: frame)
         setUpUI()
@@ -33,16 +45,16 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         photoImageView.image = nil
+        favoriteButton.removeTarget(nil, action: nil, for: .allEvents)
     }
 }
 extension PhotoCollectionViewCell{
     func setUpUI(){
         self.backgroundColor = .white
         self.contentView.backgroundColor = .white
-        
         photoImageView.translatesAutoresizingMaskIntoConstraints = false
         label.translatesAutoresizingMaskIntoConstraints = false
-        
+        favoriteButton.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(photoImageView)
         self.contentView.addSubview(label)
         
@@ -56,9 +68,18 @@ extension PhotoCollectionViewCell{
         label.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: 0).isActive = true
         label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0).isActive = true
         
+        self.contentView.addSubview(favoriteButton)
+        favoriteButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
+        favoriteButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -8).isActive = true
+        favoriteButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        favoriteButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        favoriteButton.addTarget(self, action: #selector(didTapedFavoriteButton), for: .touchUpInside)
     }
-    func config(text: String, imgUrl: String){
+    func config(text: String, imgUrl: String, isFavoriteMode: Bool, row: Int, id: String){
         label.text = text
+        currentRow = row
+        currentID = id
         if let url = URL(string: imgUrl) {
             let request = URLRequest(url: url)
             APIManager.sharedInstance.getPhotoRequest(request) { [weak self] (result) in
@@ -73,6 +94,15 @@ extension PhotoCollectionViewCell{
                     strongSelf.photoImageView.backgroundColor = .lightGray
                 }
             }
+        }
+        favoriteButton.isHidden = isFavoriteMode
+    }
+    
+    @objc func didTapedFavoriteButton(){
+        print("didTapedFavoriteButton")
+        favoriteButton.isHidden = true
+        if let callBack = self.didTappedFavorite{
+            callBack((id: self.currentID , row: self.currentRow))
         }
     }
 }

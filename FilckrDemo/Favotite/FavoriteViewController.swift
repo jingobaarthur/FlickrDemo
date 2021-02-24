@@ -16,10 +16,10 @@ class FavoriteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCollectionView()
+        bindViewModel()
+        self.viewModel.didUpdate()
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
+    
 }
 //MARK: Set up UI
 extension FavoriteViewController{
@@ -48,16 +48,21 @@ extension FavoriteViewController{
         collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
     }
+    func bindViewModel(){
+        viewModel.completed = { [weak self] in
+            print("DidFinish fetch photo data")
+            self?.collectionView.reload(completion: {})
+        }
+    }
 }
 //MARK: UICOllectionView delegate & datasource
 extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return viewModel.photo.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as! PhotoCollectionViewCell
-        cell.photoImageView.backgroundColor = .lightGray
-        //cell.config(text: viewModel.photo[indexPath.item].title, imgUrl: viewModel.photo[indexPath.item].urlString)
+        cell.config(text: viewModel.photo[indexPath.item].title, imgUrl: viewModel.photo[indexPath.item].urlString, isFavoriteMode: true, row: indexPath.item, id: viewModel.photo[indexPath.item].id)
         return cell
     }
 }
