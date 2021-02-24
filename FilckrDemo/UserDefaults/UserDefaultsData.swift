@@ -14,13 +14,17 @@ class UserDefaultsData{
     static let sharedInstance = UserDefaultsData()
     private init() {}
     
+    var completed: (() -> Void)?
+    
     var photoData: [PhotoDetailData]{
         get{
             return getPhotoData(UserDefaultsKeys.photoData.rawValue)
         }
         set{
             savePhotoData(UserDefaultsKeys.photoData.rawValue, value: newValue)
-            NotificationCenter.default.post(name: Notification.Name("didUpdateFavorite"), object: nil, userInfo: nil)
+            if let callback = self.completed{
+                callback()
+            }
         }
     }
     
