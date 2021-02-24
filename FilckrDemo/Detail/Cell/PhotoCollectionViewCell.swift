@@ -13,7 +13,6 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         let imgView = UIImageView()
         imgView.backgroundColor = .clear
         imgView.contentMode = .scaleAspectFit
-        imgView.backgroundColor = .lightGray
         return imgView
     }()
     
@@ -70,6 +69,8 @@ extension PhotoCollectionViewCell{
                     strongSelf.photoImageView.image = photoImage
                 case .failure(let error):
                     print("getPhotoRequest:",error)
+                    strongSelf.photoImageView.image = nil
+                    strongSelf.photoImageView.backgroundColor = .lightGray
                 }
             }
         }
