@@ -17,7 +17,8 @@ class FavoriteViewController: BaseViewController {
         super.viewDidLoad()
         setUp()
         initBind()
-        self.viewModel.didUpdate()
+        setUpLongPress()
+        self.viewModel.loadFromCoreData()
     }
     
     override func setUp() {
@@ -59,17 +60,36 @@ class FavoriteViewController: BaseViewController {
         let vc = FavoriteViewController()
         return vc
     }
-    
+}
+extension FavoriteViewController: UIGestureRecognizerDelegate{
+    func setUpLongPress(){
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        longPress.minimumPressDuration = 0.5
+        longPress.delegate = self
+        longPress.delaysTouchesBegan = true
+        collectionView.addGestureRecognizer(longPress)
+    }
+    @objc func handleLongPress(gesture : UILongPressGestureRecognizer){
+        if (gesture.state != .began) {
+            return
+        }
+        let p = gesture.location(in: collectionView)
+        
+        if let indexPath = collectionView.indexPathForItem(at: p) {
+            print("Long press at item: \(indexPath.row)")
+            self.viewModel.delete(at: indexPath.row)
+        }
+    }
 }
 
 //MARK: UICOllectionView delegate & datasource
 extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.photo.count
+        return viewModel.photoM.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as! PhotoCollectionViewCell
-        cell.config(text: viewModel.photo[indexPath.item].title, imgUrl: viewModel.photo[indexPath.item].urlString, isFavoriteMode: true, row: indexPath.item, id: viewModel.photo[indexPath.item].id)
+        cell.configWithFavorite(text: viewModel.photoM[indexPath.item].title ?? "", imgUrl: viewModel.photoM[indexPath.item].imgUrl ?? "", row: indexPath.item, id: viewModel.photoM[indexPath.item].id ?? "")
         return cell
     }
 }

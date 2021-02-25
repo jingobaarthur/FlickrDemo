@@ -8,16 +8,23 @@
 import Foundation
 class FavotiteViewModel {
     var photo : [PhotoDetailData] = []
+    var photoM: [PhotoMO] = []
     var completed: (() -> Void)?
     init() {
-        UserDefaultsData.sharedInstance.completed = { [weak self] in
+        FlickrCoreDataHelper.sharedInstance.completed = { [weak self](context) in
             self?.didUpdate()
         }
     }
     @objc func didUpdate(){
-        self.photo = UserDefaultsData.sharedInstance.photoData
+        self.photoM = FlickrCoreDataHelper.sharedInstance.photoData
         if let callBack = self.completed{
             callBack()
         }
+    }
+    func loadFromCoreData(){
+        FlickrCoreDataHelper.sharedInstance.load()
+    }
+    func delete(at row: Int){
+        FlickrCoreDataHelper.sharedInstance.delete(target: photoM[row])
     }
 }

@@ -18,12 +18,12 @@ class PhotoDetailViewModel{
     
     func addToFavorite(id: String, row: Int){
         print("新增至我的最愛-->id: \(id), row: \(row)")
-        var photoDataFromUserDefaults = UserDefaultsData.sharedInstance.photoData
         let filterArray = photo.filter {
             $0.id == id
         }
-        photoDataFromUserDefaults += filterArray
-        UserDefaultsData.sharedInstance.photoData = photoDataFromUserDefaults
+        for i in 0..<filterArray.count{
+            FlickrCoreDataHelper.sharedInstance.inster(id: filterArray[i].id, imgUrl: filterArray[i].urlString, title: filterArray[0].title)
+        }
     }
     
     func fetchPhotoData(text: String, pages: String, prePage: String){

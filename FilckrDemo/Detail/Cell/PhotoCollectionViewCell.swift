@@ -98,6 +98,28 @@ extension PhotoCollectionViewCell{
         favoriteButton.isHidden = isFavoriteMode
     }
     
+    func configWithFavorite(text: String, imgUrl: String, row: Int, id: String){
+        label.text = text
+        currentRow = row
+        currentID = id
+        favoriteButton.isHidden = true
+        if let url = URL(string: imgUrl) {
+            let request = URLRequest(url: url)
+            APIManager.sharedInstance.getPhotoRequest(request) { [weak self] (result) in
+                guard let strongSelf = self else { return }
+                switch result {
+                case .success(let data):
+                    let photoImage = UIImage(data: data)
+                    strongSelf.photoImageView.image = photoImage
+                case .failure(let error):
+                    print("getPhotoRequest:",error)
+                    strongSelf.photoImageView.image = nil
+                    strongSelf.photoImageView.backgroundColor = .lightGray
+                }
+            }
+        }
+    }
+    
     @objc func didTapedFavoriteButton(){
         print("didTapedFavoriteButton")
         favoriteButton.isHidden = true
