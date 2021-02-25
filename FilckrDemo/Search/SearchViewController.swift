@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+class SearchViewController: BaseViewController {
     fileprivate let viewModel = SearchViewModel()
     /*搜尋內容*/
     lazy var contentTextField: UITextField = {
@@ -43,22 +43,20 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpUI()
+        setUp()
         textFieldAction()
-        bindViewModel()
+        initBind()
     }
-    
+    static func initViewController() -> SearchViewController{
+        let vc = SearchViewController()
+        return vc
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         self.view.endEditing(true)
     }
-    
-}
-//MARK: SetUp UI
-extension SearchViewController{
-    
-    func setUpUI(){
-        
+    override func setUp() {
+        super.setUp()
         self.view.backgroundColor = .white
         
         contentTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -85,19 +83,20 @@ extension SearchViewController{
         
         stackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         stackView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-        
     }
     
-    func bindViewModel(){
+    override func initBind() {
+        super.initBind()
         viewModel.completed = { [weak self] in
             print("DidFinish fetch photo data")
             if let contentString = self?.contentTextField.text, let page = self?.prePageTextField.text{
-                self?.showPhotDetail(searchText: contentString, prePage: page)
+                //self?.showPhotDetail(searchText: contentString, prePage: page)
+                self?.showPhotoDetailByNavigator(searchText: contentString, prePage: page)
             }
         }
     }
-    
 }
+
 //MARK: Selector
 extension SearchViewController{
     @objc func textFieldAction(){
@@ -132,6 +131,11 @@ extension SearchViewController{
         contentTextField.text = ""
         prePageTextField.text = ""
         self.navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
+    func showPhotoDetailByNavigator(searchText: String, prePage: String){
+        guard let prePage = Int(prePage), let photoArray = viewModel.photoResponseData?.photos?.photo else {return}
+        navigator.show(destination: .photoDetail(searchText: searchText, prePage: prePage, photoArray: photoArray), sender: self)
     }
 }
 

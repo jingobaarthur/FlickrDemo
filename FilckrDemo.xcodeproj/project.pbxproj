@@ -23,6 +23,8 @@
 		4DF5DA8F25E65F9600557002 /* UICollectionVIew+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF5DA8E25E65F9600557002 /* UICollectionVIew+extension.swift */; };
 		4DF5DA9325E6B2A800557002 /* FavotiteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF5DA9225E6B2A800557002 /* FavotiteViewModel.swift */; };
 		4DF5DA9825E6BC6200557002 /* UserDefaultsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF5DA9725E6BC6200557002 /* UserDefaultsData.swift */; };
+		4DF5DA9D25E7467B00557002 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF5DA9C25E7467B00557002 /* BaseViewController.swift */; };
+		4DF5DACB25E7508700557002 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF5DACA25E7508700557002 /* Navigator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		4DF5DA8E25E65F9600557002 /* UICollectionVIew+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionVIew+extension.swift"; sourceTree = "<group>"; };
 		4DF5DA9225E6B2A800557002 /* FavotiteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavotiteViewModel.swift; sourceTree = "<group>"; };
 		4DF5DA9725E6BC6200557002 /* UserDefaultsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsData.swift; sourceTree = "<group>"; };
+		4DF5DA9C25E7467B00557002 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		4DF5DACA25E7508700557002 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,8 @@
 		4D669DFD25E5434C0041C19E /* FilckrDemo */ = {
 			isa = PBXGroup;
 			children = (
+				4DF5DAC925E7507500557002 /* Navigator */,
+				4DF5DA9B25E7465D00557002 /* BaseViewController */,
 				4DF5DA9625E6BC4100557002 /* Extensions */,
 				4DF5DA9525E6BC2D00557002 /* UserDefaults */,
 				4DF5DA7E25E62AB600557002 /* APIManager */,
@@ -161,6 +167,22 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		4DF5DA9B25E7465D00557002 /* BaseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4DF5DA9C25E7467B00557002 /* BaseViewController.swift */,
+			);
+			path = BaseViewController;
+			sourceTree = "<group>";
+		};
+		4DF5DAC925E7507500557002 /* Navigator */ = {
+			isa = PBXGroup;
+			children = (
+				4DF5DACA25E7508700557002 /* Navigator.swift */,
+			);
+			path = Navigator;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -236,11 +258,13 @@
 				4DF5DA8F25E65F9600557002 /* UICollectionVIew+extension.swift in Sources */,
 				4DF5DA8425E638DB00557002 /* SearchViewModel.swift in Sources */,
 				4D669DFF25E5434C0041C19E /* AppDelegate.swift in Sources */,
+				4DF5DA9D25E7467B00557002 /* BaseViewController.swift in Sources */,
 				4DF5DA8C25E647B000557002 /* PhotoDetailViewModel.swift in Sources */,
 				4D669E1925E610D20041C19E /* PhotoDetailViewController.swift in Sources */,
 				4DF5DA9825E6BC6200557002 /* UserDefaultsData.swift in Sources */,
 				4DF5DA8825E63A0A00557002 /* PhotoCollectionViewCell.swift in Sources */,
 				4DF5DA9325E6B2A800557002 /* FavotiteViewModel.swift in Sources */,
+				4DF5DACB25E7508700557002 /* Navigator.swift in Sources */,
 				4D669E0125E5434C0041C19E /* SceneDelegate.swift in Sources */,
 				4D669E1D25E610EA0041C19E /* FavoriteViewController.swift in Sources */,
 				4DF5DA8125E62ADD00557002 /* APIManager.swift in Sources */,

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PhotoDetailViewController: UIViewController {
+class PhotoDetailViewController: BaseViewController {
     
     let viewModel = PhotoDetailViewModel()
     
@@ -24,18 +24,21 @@ class PhotoDetailViewController: UIViewController {
         super.viewDidLoad()
         title = "搜尋結果: " + viewModel.searchTitle
         print("搜尋結果: \(viewModel.searchTitle), prePage: \(viewModel.currentPrePage)")
-        setUpCollectionView()
-        bindViewModel()
+        setUp()
+        initBind()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
     }
-
-}
-//MARK: SetUp UI
-extension PhotoDetailViewController{
-    func setUpCollectionView(){
+    static func initViewController(searchText: String, prePage: Int, photoArray: [PhotoDetailData]) -> PhotoDetailViewController{
+        let vc = PhotoDetailViewController()
+        vc.viewModel.searchTitle = searchText
+        vc.viewModel.currentPrePage = prePage
+        vc.viewModel.photo = photoArray
+        return vc
+    }
+    override func setUp() {
+        super.setUp()
         self.view.backgroundColor = .white
         layout.minimumLineSpacing = 5
         layout.minimumInteritemSpacing = 5
@@ -61,13 +64,18 @@ extension PhotoDetailViewController{
         
         collectionView.refreshControl = refreshControl
     }
-    func bindViewModel(){
+    override func initBind() {
+        super.initBind()
         viewModel.completed = { [weak self] in
             print("DidFinish fetch photo data")
             self?.refreshControl.endRefreshing()
             self?.collectionView.reload(completion: {})
         }
     }
+
+}
+//MARK: Selector
+extension PhotoDetailViewController{
     @objc func didPullDownToUpdate(){
         print("下拉更新")
         viewModel.currentPage = 1

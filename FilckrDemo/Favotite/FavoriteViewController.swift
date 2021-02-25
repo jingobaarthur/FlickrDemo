@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FavoriteViewController: UIViewController {
+class FavoriteViewController: BaseViewController {
     
     let viewModel = FavotiteViewModel()
     lazy var collectionView = UICollectionView()
@@ -15,15 +15,13 @@ class FavoriteViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpCollectionView()
-        bindViewModel()
+        setUp()
+        initBind()
         self.viewModel.didUpdate()
     }
     
-}
-//MARK: Set up UI
-extension FavoriteViewController{
-    func setUpCollectionView(){
+    override func setUp() {
+        super.setUp()
         self.view.backgroundColor = .white
         title = "我的最愛"
         layout.minimumLineSpacing = 5
@@ -48,13 +46,22 @@ extension FavoriteViewController{
         collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
     }
-    func bindViewModel(){
+    
+    override func initBind() {
+        super.initBind()
         viewModel.completed = { [weak self] in
-            print("DidFinish fetch photo data")
+            print("DidFinish fetch photo data form loacl")
             self?.collectionView.reload(completion: {})
         }
     }
+    
+    static func initViewController() -> FavoriteViewController{
+        let vc = FavoriteViewController()
+        return vc
+    }
+    
 }
+
 //MARK: UICOllectionView delegate & datasource
 extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
