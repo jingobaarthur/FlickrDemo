@@ -61,6 +61,7 @@ class FavoriteViewController: BaseViewController {
         return vc
     }
 }
+//MARK: Set GestureRecognizer
 extension FavoriteViewController: UIGestureRecognizerDelegate{
     func setUpLongPress(){
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))

@@ -90,7 +90,7 @@ extension PhotoDetailViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as! PhotoCollectionViewCell
-        cell.config(text: viewModel.photo[indexPath.item].title, imgUrl: viewModel.photo[indexPath.item].urlString, isFavoriteMode: false, row: indexPath.item, id: viewModel.photo[indexPath.item].id)
+        cell.config(text: viewModel.photo[indexPath.item].title, imgUrl: viewModel.photo[indexPath.item].urlString, row: indexPath.item, id: viewModel.photo[indexPath.item].id)
         cell.didTappedFavorite = { [weak self] (callback) in
             self?.viewModel.addToFavorite(id: callback.id, row: callback.row)
         }

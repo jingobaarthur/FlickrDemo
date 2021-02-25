@@ -43,6 +43,28 @@ class FlickrCoreDataHelper{
             }
         }
     }
+    func inquire(id: String) -> Bool{
+        let moc = managedObjectContext()
+        let fetchRequest = NSFetchRequest<PhotoMO>(entityName: "Photo")
+        var isAlreadyHas = false
+        moc.performAndWait {
+            do{
+                let result = try moc.fetch(fetchRequest)
+                for i in 0..<result.count{
+                    if id == result[i].id{
+                        isAlreadyHas = true
+                    }else{
+                        isAlreadyHas = false
+                    }
+                }
+                
+            }catch{
+                print("error \(error)")
+                isAlreadyHas = false
+            }
+        }
+        return isAlreadyHas
+    }
     func inster(id: String, imgUrl: String, title: String){
         let moc = managedObjectContext()
         let photo = PhotoMO(context: moc)

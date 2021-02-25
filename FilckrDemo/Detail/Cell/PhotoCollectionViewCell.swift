@@ -31,7 +31,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     
     let favoriteButton: UIButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(named: "icon_UnFavorite"), for: .normal)
+        btn.setImage(UIImage(named: "icon_AddFavorite"), for: .normal)
         return btn
     }()
     
@@ -76,10 +76,11 @@ extension PhotoCollectionViewCell{
         
         favoriteButton.addTarget(self, action: #selector(didTapedFavoriteButton), for: .touchUpInside)
     }
-    func config(text: String, imgUrl: String, isFavoriteMode: Bool, row: Int, id: String){
+    func config(text: String, imgUrl: String, row: Int, id: String){
         label.text = text
         currentRow = row
         currentID = id
+        favoriteButton.isHidden = FlickrCoreDataHelper.sharedInstance.inquire(id: id)
         if let url = URL(string: imgUrl) {
             let request = URLRequest(url: url)
             APIManager.sharedInstance.getPhotoRequest(request) { [weak self] (result) in
@@ -95,8 +96,8 @@ extension PhotoCollectionViewCell{
                 }
             }
         }
-        favoriteButton.isHidden = isFavoriteMode
     }
+    
     
     func configWithFavorite(text: String, imgUrl: String, row: Int, id: String){
         label.text = text
